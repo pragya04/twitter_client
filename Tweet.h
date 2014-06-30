@@ -16,6 +16,9 @@
 @property (nonatomic, copy, readonly) NSString *tweetContent;
 @property (nonatomic) BOOL favorited;
 @property (nonatomic) BOOL retweeted;
+@property (nonatomic, copy, readonly) NSNumber *retweets;
+@property (nonatomic, copy, readonly) NSNumber *favorites;
+@property (nonatomic, copy, readonly) NSString *retweetedByUserName;
 @property (nonatomic, copy, readonly) NSNumber *id;
 
 

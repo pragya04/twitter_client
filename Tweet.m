@@ -18,7 +18,9 @@
     @"tweetContent": @"text",
     @"createdAt": @"created_at",
     @"favorited": @"favorited",
-    @"retweeted": @"retweeted"
+    @"retweeted": @"retweeted",
+    @"retweets": @"retweet_count",
+    @"favorites": @"favourites_count"
     };
 }
 

@@ -8,6 +8,7 @@
 
 #import "TwitterViewController.h"
 #import "ComposeViewController.h"
+#import "TweetViewController.h"
 #import "TweetCell.h"
 #import "TwitterClient.h"
 #import "Tweet.h"
@@ -99,6 +100,15 @@
     return self.tweets.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TweetViewController *tweetvc = [[TweetViewController alloc] init];
+    tweetvc.singleTweet = ((Tweet *)self.tweets[indexPath.row]);
+//    tvc.delegate = self;
+    
+    self.navigationItem.backBarButtonItem.title = @"Home";
+    [self.navigationController pushViewController:tweetvc animated:YES];
+}
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    Tweet *t = self.tweets[indexPath.row];
 //    _stubCell.tweet = t;
@@ -111,7 +121,7 @@
 //{
 //    return 130.f;
 //}
-
+#pragma-mark user actions
 - (void)favoriteTweet:(Tweet*)tweet {
     
     [[TwitterClient instance] favoriteWithTweet:tweet success:^{
