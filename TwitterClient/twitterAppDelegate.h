@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TwitterViewController.h"
+#import "LoginViewController.h"
 
 @interface twitterAppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong, nonatomic) TwitterViewController *tvc;
+@property (strong, nonatomic) LoginViewController *lvc;
+@property (strong, nonatomic) UINavigationController *nc;
+extern NSString *const FavoriteTapped;
 @property (strong, nonatomic) UIWindow *window;
 
 @end
