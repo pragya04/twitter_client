@@ -8,6 +8,8 @@
 
 #import "TweetViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
+#import "TwitterClient.h"
 
 @interface TweetViewController ()
 
@@ -28,7 +30,13 @@
 {
     [super viewDidLoad];
     [self displayTweetData];
+    UIBarButtonItem *replyButton = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"Reply"
+                                    style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(replyButtonTap:)];
     
+    self.navigationItem.rightBarButtonItem = replyButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,7 +58,7 @@
     } else {
         self.favoritesCount.text = @"0";
     }
-    self.rewteetCount.text = [NSString stringWithFormat:@"%@", self.singleTweet.retweets];
+    self.retweetCount.text = [NSString stringWithFormat:@"%@", self.singleTweet.retweets];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
@@ -61,5 +69,10 @@
     self.tweetTimestamp.text = [formatter stringFromDate:tweetDate];
     
 }
+- (void)replyButtonTap:(id)sender {
+    ComposeViewController *cvc = [[ComposeViewController alloc] init];
+    self.navigationItem.backBarButtonItem.title = @"Cancel";
+    cvc.defaultText = [NSString stringWithFormat:@"@%@", self.singleTweet.screenName];
+    [self.navigationController pushViewController:cvc animated:YES];}
 
 @end

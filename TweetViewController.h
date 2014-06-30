@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetText;
 @property (weak, nonatomic) IBOutlet UILabel *tweetTimestamp;
-@property (weak, nonatomic) IBOutlet UILabel *rewteetCount;
+@property (weak, nonatomic) IBOutlet UILabel *retweetCount;
 @property (weak, nonatomic) IBOutlet UILabel *favoritesCount;
 @property (nonatomic, strong) Tweet *singleTweet;
 

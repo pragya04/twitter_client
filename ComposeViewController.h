@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *tweetText;
+@property (strong, nonatomic) NSString *defaultText;
 
 @end

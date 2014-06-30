@@ -24,6 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Compose";
+        self.defaultText = @"";
     }
     return self;
 }
@@ -46,6 +47,7 @@
                                       action:@selector(tweetButtonTap:)];
     
     self.navigationItem.rightBarButtonItem = tweetButton;
+    self.tweetText.text = self.defaultText;
 }
 
 - (void)didReceiveMemoryWarning
