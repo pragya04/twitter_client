@@ -51,20 +51,33 @@ NSString * const ReplyTapped = @"ReplyTapped";
 //        self.constraintRetweet.constant -= 30;
 //    }
     self.userTweetTimestamp.text = [MHPrettyDate prettyDateFromDate:[formatter dateFromString:tweet.createdAt] withFormat:MHPrettyDateShortRelativeTime];
-    [self.favoriteButton setSelected:tweet.favorited];
-    [self.retweetButton setSelected:tweet.retweeted];
-}
+    if(tweet.retweeted == YES) {
+        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
+        [self.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
+    }
+    
+    if(tweet.favorited == YES) {
+        UIImage *FavImage = [UIImage imageNamed:@"isFav.png"];
+        [self.favoriteButton setBackgroundImage:FavImage forState:UIControlStateNormal];
+    }
 
+}
 
 - (IBAction)onReplyTap:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:ReplyTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 
 - (IBAction)onRetweetTap:(id)sender {
+    UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
+    [self.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:RetweetTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 
 - (IBAction)onStarTap:(id)sender {
+    UIImage *FavImage = [UIImage imageNamed:@"isFav.png"];
+    [self.favoriteButton setBackgroundImage:FavImage forState:UIControlStateNormal];
+
   [[NSNotificationCenter defaultCenter] postNotificationName:FavoriteTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 @end

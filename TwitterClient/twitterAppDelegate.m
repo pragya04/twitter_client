@@ -51,9 +51,9 @@
     self.nc.navigationBar.tintColor = [UIColor whiteColor];
     [self.nc.navigationBar setBarStyle:UIBarStyleBlack];
 
-//    if ([[TwitterClient instance] isAuthorized]) {
-//        [self showTimeline];
-//    }
+    if ([[TwitterClient instance] isAuthorized]) {
+        [self showTimeline];
+    }
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -120,8 +120,7 @@
 }
 
 -(void) showTimeline {
-    TwitterViewController *tvc = [[TwitterViewController alloc]        initWithNibName:@"TwitterViewController" bundle:nil];
-    
+    TwitterViewController *tvc = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
     [self.nc pushViewController:tvc animated:YES];
 }
 @end

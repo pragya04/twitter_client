@@ -38,14 +38,26 @@
     
     self.navigationItem.rightBarButtonItem = replyButton;
 
-    [self.favButton setImage:[UIImage imageNamed:@"fav.png"]
-                    forState:UIControlStateNormal];
-
-    [self.retweetButton setImage:[UIImage imageNamed:@"retweet.png"]
-                    forState:UIControlStateNormal];
-    
     [self.replyButton setImage:[UIImage imageNamed:@"reply.png"]
                     forState:UIControlStateNormal];
+    
+    if(self.singleTweet.retweeted == YES) {
+        
+        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
+        [self.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
+    } else {
+        [self.retweetButton setImage:[UIImage imageNamed:@"retweet.png"]
+                            forState:UIControlStateNormal];
+    }
+    
+    if(self.singleTweet.favorited == YES) {
+        
+        UIImage *FavImage = [UIImage imageNamed:@"isFav.png"];
+        [self.favButton setBackgroundImage:FavImage forState:UIControlStateNormal];
+    } else {
+        [self.favButton setImage:[UIImage imageNamed:@"fav.png"]
+                        forState:UIControlStateNormal];
+    }
 
 }
 

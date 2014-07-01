@@ -146,19 +146,16 @@
 //}
 #pragma-mark user actions
 - (void)favoriteTweet:(NSDictionary*)tweet {
-    TweetCell *cell = [[TweetCell alloc]init];
     [[TwitterClient instance] favoriteWithTweet:tweet[@"tweet"] success:^{
         NSLog(@"Favorited!");
-        UIImage *FavImage = [UIImage imageNamed:@"isFav.png"];
-        [cell.favoriteButton setBackgroundImage:FavImage forState:UIControlStateNormal];    
     }];
 }
 
 - (void)reTweet:(NSDictionary*)tweet {
-    TweetCell *cell = [[TweetCell alloc]init];
+//    TweetCell *cell = [[TweetCell alloc]init];
     [[TwitterClient instance] retweetWithTweet:tweet[@"tweet"] success:^{
-        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
-        [cell.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
+//        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
+//        [cell.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
     }];
 }
 
