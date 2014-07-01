@@ -37,6 +37,16 @@
                                     action:@selector(replyButtonTap:)];
     
     self.navigationItem.rightBarButtonItem = replyButton;
+
+    [self.favButton setImage:[UIImage imageNamed:@"fav.png"]
+                    forState:UIControlStateNormal];
+
+    [self.retweetButton setImage:[UIImage imageNamed:@"retweet.png"]
+                    forState:UIControlStateNormal];
+    
+    [self.replyButton setImage:[UIImage imageNamed:@"reply.png"]
+                    forState:UIControlStateNormal];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,9 +80,31 @@
     
 }
 - (void)replyButtonTap:(id)sender {
+    [self replyToTweet];
+}
+
+- (IBAction)onFavoriteTap:(id)sender {
+    [[TwitterClient instance] favoriteWithTweet:self.singleTweet success:^{
+        UIImage *FavImage = [UIImage imageNamed:@"isFav.png"];
+        [self.favButton setBackgroundImage:FavImage forState:UIControlStateNormal];
+    }];
+}
+- (IBAction)onRetweetButton:(id)sender {
+    [[TwitterClient instance] retweetWithTweet:self.singleTweet success:^{
+        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
+        [self.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
+    }];
+
+}
+
+- (IBAction)onReplyButton:(id)sender {
+    [self replyToTweet];
+}
+
+-(void) replyToTweet {
     ComposeViewController *cvc = [[ComposeViewController alloc] init];
     self.navigationItem.backBarButtonItem.title = @"Cancel";
     cvc.defaultText = [NSString stringWithFormat:@"@%@", self.singleTweet.screenName];
-    [self.navigationController pushViewController:cvc animated:YES];}
-
+    [self.navigationController pushViewController:cvc animated:NO];
+}
 @end

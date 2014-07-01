@@ -55,11 +55,16 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserverForName:@"FavoriteTapped" object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
-         [self favoriteTweet: (Tweet *)notification.userInfo];
+         [self favoriteTweet: (NSDictionary *)notification.userInfo];
      }];
     [center addObserverForName:@"RetweetTapped" object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
-         [self reTweet: (Tweet *)notification.userInfo];
+         [self reTweet: (NSDictionary *)notification.userInfo];
+     }];
+
+    [center addObserverForName:@"ReplyTapped" object:nil queue:nil usingBlock:^(NSNotification *notification)
+     {
+         [self replyTweet: (NSDictionary *)notification.userInfo];
      }];
 
 }
@@ -122,23 +127,34 @@
 //    return 130.f;
 //}
 #pragma-mark user actions
-- (void)favoriteTweet:(Tweet*)tweet {
-    
-    [[TwitterClient instance] favoriteWithTweet:tweet success:^{
+- (void)favoriteTweet:(NSDictionary*)tweet {
+    TweetCell *cell = [[TweetCell alloc]init];
+    [[TwitterClient instance] favoriteWithTweet:tweet[@"tweet"] success:^{
         NSLog(@"Favorited!");
+        UIImage *FavImage = [UIImage imageNamed:@"isFav.png"];
+        [cell.favoriteButton setBackgroundImage:FavImage forState:UIControlStateNormal];    
     }];
 }
 
-- (void)reTweet:(Tweet*)tweet {
-    
-    [[TwitterClient instance] retweetWithTweet:tweet success:^{
-        NSLog(@"Retweeted!");
+- (void)reTweet:(NSDictionary*)tweet {
+    TweetCell *cell = [[TweetCell alloc]init];
+    [[TwitterClient instance] retweetWithTweet:tweet[@"tweet"] success:^{
+        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
+        [cell.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
     }];
+}
+
+- (void)replyTweet:(NSDictionary*)tweet {
+    ComposeViewController *cvc = [[ComposeViewController alloc] init];
+    Tweet *tweetModel = tweet[@"tweet"];
+    cvc.defaultText = [NSString stringWithFormat:@"@%@", tweetModel.screenName];
+    self.navigationItem.backBarButtonItem.title = @"Cancel";
+    [self.navigationController pushViewController:cvc animated:YES];
+
 }
 
 - (void)composeButtonTap:(id)sender {
     ComposeViewController *cvc = [[ComposeViewController alloc] init];
-
     self.navigationItem.backBarButtonItem.title = @"Cancel";
     [self.navigationController pushViewController:cvc animated:YES];
 }

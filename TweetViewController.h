@@ -19,5 +19,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *retweetCount;
 @property (weak, nonatomic) IBOutlet UILabel *favoritesCount;
 @property (nonatomic, strong) Tweet *singleTweet;
+- (IBAction)onFavoriteTap:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *favButton;
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+- (IBAction)onRetweetButton:(id)sender;
+- (IBAction)onReplyButton:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @end

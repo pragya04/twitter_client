@@ -36,13 +36,10 @@
              success:success failure:failure];
 }
 
-- (void)favoriteWithTweet:(NSDictionary *)tweet success:(void (^)())success
+- (void)favoriteWithTweet:(Tweet *)tweet success:(void (^)())success
 {
-
-    Tweet *tweet_obj = tweet[@"tweet"];
-    
     [self POST:@"https://api.twitter.com/1.1/favorites/create.json"
-       parameters:@{@"id": tweet_obj.id}
+       parameters:@{@"id": tweet.id}
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
            success();
        }
@@ -53,12 +50,10 @@
 }
 
 
-- (void)retweetWithTweet:(NSDictionary *)tweet success:(void (^)())success
+- (void)retweetWithTweet:(Tweet *)tweet success:(void (^)())success
 {
-    Tweet *tweet_obj = tweet[@"tweet"];
     
-    NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/%@.json", tweet_obj.id];
-    
+    NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/statuses/retweet/%@.json", tweet.id];
     [self POST:url
     parameters:nil
        success:^(AFHTTPRequestOperation *operation, id responseObject) {

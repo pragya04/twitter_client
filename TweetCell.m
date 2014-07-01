@@ -9,24 +9,22 @@
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "MHPrettyDate.h"
+#import "ComposeViewController.h"
 
 @implementation TweetCell
 static NSDateFormatter *formatter = nil;
 NSString * const FavoriteTapped = @"FavoriteTapped";
 NSString * const RetweetTapped = @"RetweetTapped";
+NSString * const ReplyTapped = @"ReplyTapped";
 
 - (void)awakeFromNib {
 
     [self.retweetButton setImage:[UIImage imageNamed:@"retweet.png"]
                             forState:UIControlStateNormal];
-    [self.retweetButton setImage:[UIImage imageNamed:@"retweet_done.png"]
-                        forState:UIControlStateNormal];
     [self.replyButton setImage:[UIImage imageNamed:@"reply.png"]
                          forState:UIControlStateNormal];
     [self.favoriteButton setImage:[UIImage imageNamed:@"fav.png"]
                          forState:UIControlStateNormal];
-    [self.favoriteButton setImage:[UIImage imageNamed:@"isFav.png"]
-                         forState:UIControlStateSelected];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -59,13 +57,14 @@ NSString * const RetweetTapped = @"RetweetTapped";
 
 
 - (IBAction)onReplyTap:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:ReplyTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 
 - (IBAction)onRetweetTap:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:RetweetTapped object:self userInfo: @{@"sender": sender, @"tweet":(Tweet *)_tweet}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:RetweetTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 
 - (IBAction)onStarTap:(id)sender {
-  [[NSNotificationCenter defaultCenter] postNotificationName:FavoriteTapped object:self userInfo: @{@"sender": sender, @"tweet":(Tweet *)_tweet}];
+  [[NSNotificationCenter defaultCenter] postNotificationName:FavoriteTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 @end
