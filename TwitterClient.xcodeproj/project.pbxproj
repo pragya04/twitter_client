@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1509FE84196363990029FA1E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1509FE83196363990029FA1E /* README.md */; };
 		15A877AF195D4DCB0098D784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A877AE195D4DCB0098D784 /* Foundation.framework */; };
 		15A877B1195D4DCB0098D784 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A877B0195D4DCB0098D784 /* CoreGraphics.framework */; };
 		15A877B3195D4DCB0098D784 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A877B2195D4DCB0098D784 /* UIKit.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1509FE83196363990029FA1E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		15A877AB195D4DCB0098D784 /* TwitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A877AE195D4DCB0098D784 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15A877B0195D4DCB0098D784 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +117,7 @@
 		15A877A2195D4DCB0098D784 = {
 			isa = PBXGroup;
 			children = (
+				1509FE83196363990029FA1E /* README.md */,
 				15BAE70C1961E444006E4F40 /* TweetViewController.h */,
 				15BAE70D1961E444006E4F40 /* TweetViewController.m */,
 				15BAE70E1961E444006E4F40 /* TweetViewController.xib */,
@@ -289,6 +292,7 @@
 				15A877EE195F4E380098D784 /* TweetCell.xib in Resources */,
 				15A877B9195D4DCB0098D784 /* InfoPlist.strings in Resources */,
 				15A877C1195D4DCB0098D784 /* Images.xcassets in Resources */,
+				1509FE84196363990029FA1E /* README.md in Resources */,
 				15A877E4195D51830098D784 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -51,6 +51,19 @@
 //    _stubCell = [[UINib nibWithNibName:@"TweetCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     self.tableView.rowHeight = 120;
     self.client = [TwitterClient instance];
+    
+    
+    /* For refresh control*/
+    UITableViewController *tvc = [[UITableViewController alloc] init];
+    tvc.tableView = self.tableView;
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [refreshControl addTarget:self
+                       action:@selector(refresh:)
+             forControlEvents:UIControlEventValueChanged];
+    tvc.refreshControl = refreshControl;
+    
     [self loadData];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserverForName:@"FavoriteTapped" object:nil queue:nil usingBlock:^(NSNotification *notification)
@@ -67,6 +80,11 @@
          [self replyTweet: (NSDictionary *)notification.userInfo];
      }];
 
+}
+
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    [self loadData];
+    [refreshControl endRefreshing];
 }
 
 -(void)loadData {
