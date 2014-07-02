@@ -40,16 +40,10 @@ NSString * const ReplyTapped = @"ReplyTapped";
     self.userNameLabel.text = tweet.name;
     self.userScreenName.text = [NSString stringWithFormat:@"@%@", tweet.screenName];
     self.userImage.layer.cornerRadius = 5;
-    self.userImage.clipsToBounds=YES;
+    self.userImage.clipsToBounds = YES;
     [self.userImage setImageWithURL:[NSURL URLWithString:tweet.userImageUrl]];
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"eee MMM dd HH:mm:ss ZZZZ yyyy"];
-//    if (tweet.retweetedByName) {
-//        self.lblSomeoneRetweeted.text = [NSString stringWithFormat:@"%@ retweeted", tweet.retweetedByName];
-//    }else {
-//        self.viewRetweet.hidden = YES;
-//        self.constraintRetweet.constant -= 30;
-//    }
     self.userTweetTimestamp.text = [MHPrettyDate prettyDateFromDate:[formatter dateFromString:tweet.createdAt] withFormat:MHPrettyDateShortRelativeTime];
     if(tweet.retweeted == YES) {
         UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
@@ -64,8 +58,6 @@ NSString * const ReplyTapped = @"ReplyTapped";
 }
 
 - (IBAction)onReplyTap:(id)sender {
-    
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:ReplyTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 

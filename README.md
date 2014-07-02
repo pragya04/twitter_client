@@ -1,5 +1,7 @@
 User Stories:
 
+Hour spent: 25+ hours
+
 * [x] User can sign in using OAuth login flow
 * [x] User can view last 20 tweets from their home timeline
 * [x] The current signed in user will be persisted across restarts
@@ -7,3 +9,6 @@ User Stories:
 * [x] User can pull to refresh
 * [x] User can compose a new tweet by tapping on a compose button.
 * [x] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
+
+Walkthrough of all user stories:
+![Video Walkthrough](mock_twitter.gif)
