@@ -15,11 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *userScreenName;
 @property (weak, nonatomic) IBOutlet UILabel *userTweetTimestamp;
 @property (weak, nonatomic) IBOutlet UILabel *userTweetLabel;
-@property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (nonatomic, strong) Tweet *tweet;
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
 - (IBAction)onReplyTap:(id)sender;
+
 - (IBAction)onRetweetTap:(id)sender;
 - (IBAction)onStarTap:(id)sender;
 

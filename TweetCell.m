@@ -19,11 +19,11 @@ NSString * const ReplyTapped = @"ReplyTapped";
 
 - (void)awakeFromNib {
 
-    [self.retweetButton setImage:[UIImage imageNamed:@"retweet.png"]
+    [self.retweetButton setBackgroundImage:[UIImage imageNamed:@"retweet.png"]
                             forState:UIControlStateNormal];
-    [self.replyButton setImage:[UIImage imageNamed:@"reply.png"]
+    [self.replyButton setBackgroundImage:[UIImage imageNamed:@"reply.png"]
                          forState:UIControlStateNormal];
-    [self.favoriteButton setImage:[UIImage imageNamed:@"fav.png"]
+    [self.favoriteButton setBackgroundImage:[UIImage imageNamed:@"fav.png"]
                          forState:UIControlStateNormal];
 }
 
@@ -64,6 +64,8 @@ NSString * const ReplyTapped = @"ReplyTapped";
 }
 
 - (IBAction)onReplyTap:(id)sender {
+    
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:ReplyTapped object:self userInfo: @{@"tweet":(Tweet *)_tweet}];
 }
 

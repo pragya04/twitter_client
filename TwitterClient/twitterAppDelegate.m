@@ -47,7 +47,10 @@
     self.window.rootViewController = self.nc;
     
     self.nc.navigationBar.translucent = NO;
-    self.nc.navigationBar.barTintColor = [UIColor blueColor];
+    self.nc.navigationBar.barTintColor = [UIColor colorWithRed:51.0f/255.0f
+                                                         green:204.0f/255.0f
+                                                          blue:255.0f/255.0f
+                                                         alpha:1];
     self.nc.navigationBar.tintColor = [UIColor whiteColor];
     [self.nc.navigationBar setBarStyle:UIBarStyleBlack];
 

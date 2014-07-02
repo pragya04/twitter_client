@@ -29,6 +29,13 @@
     if (self) {
         self.title = @"Home";
     }
+    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Log Out"
+                                      style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(logOut:)];
+    
+    self.navigationItem.leftBarButtonItem = logOutButton;
     
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc]
                                       initWithTitle:@"Compose"
@@ -41,6 +48,11 @@
     return self;
 }
 
+- (void)logOut:(id)sender {
+    [[TwitterClient instance].requestSerializer removeAccessToken];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,8 +60,8 @@
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil]
         forCellReuseIdentifier:@"TweetCell"];
-//    _stubCell = [[UINib nibWithNibName:@"TweetCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-    self.tableView.rowHeight = 120;
+    _stubCell = [[UINib nibWithNibName:@"TweetCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+//    self.tableView.rowHeight = 120;
     self.client = [TwitterClient instance];
     
     
@@ -132,18 +144,18 @@
     self.navigationItem.backBarButtonItem.title = @"Home";
     [self.navigationController pushViewController:tweetvc animated:YES];
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    Tweet *t = self.tweets[indexPath.row];
-//    _stubCell.tweet = t;
-//    [_stubCell layoutSubviews];
-//    
-//    CGFloat height = [_stubCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//    return height + 1;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 130.f;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Tweet *t = self.tweets[indexPath.row];
+    _stubCell.tweet = t;
+    [_stubCell layoutSubviews];
+    
+    CGFloat height = [_stubCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height + 1;
+}
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 130.f;
+}
 #pragma-mark user actions
 - (void)favoriteTweet:(NSDictionary*)tweet {
     [[TwitterClient instance] favoriteWithTweet:tweet[@"tweet"] success:^{
@@ -154,8 +166,7 @@
 - (void)reTweet:(NSDictionary*)tweet {
 //    TweetCell *cell = [[TweetCell alloc]init];
     [[TwitterClient instance] retweetWithTweet:tweet[@"tweet"] success:^{
-//        UIImage *RetweetImage = [UIImage imageNamed:@"retweet_done.png"];
-//        [cell.retweetButton setBackgroundImage:RetweetImage forState:UIControlStateNormal];
+        NSLog(@"Retweeted!");
     }];
 }
 
