@@ -32,13 +32,6 @@
     if (self) {
         self.title = @"Home";
     }
-//    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]
-//                                      initWithTitle:@"Log Out"
-//                                      style:UIBarButtonItemStylePlain
-//                                      target:self
-//                                      action:@selector(logOut:)];
-//    
-//    self.navigationItem.leftBarButtonItem = logOutButton;
     
     UIBarButtonItem *showMenu = [[UIBarButtonItem alloc]
                                      initWithTitle:@"Menu"
@@ -57,11 +50,6 @@
     self.navigationItem.rightBarButtonItem = composeButton;
 
     return self;
-}
-
-- (void)logOut:(id)sender {
-    [[TwitterClient instance].requestSerializer removeAccessToken];
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
@@ -134,7 +122,7 @@
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error loading timeline %@", error);
+        NSLog(@"error loading mentions timeline %@", error);
     }];
     
 }

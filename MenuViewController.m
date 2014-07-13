@@ -11,12 +11,18 @@
 #import "ProfileViewController.h"
 #import "TwitterClient.h"
 #import "User.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MenuViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *menuUserImg;
+@property (weak, nonatomic) IBOutlet UILabel *menuUserName;
+@property (weak, nonatomic) IBOutlet UILabel *menuScreenName;
+
 - (IBAction)onProfileTap:(id)sender;
 - (IBAction)onTimelineTap:(id)sender;
 - (IBAction)onMentionsTap:(id)sender;
 - (IBAction)onLogoutTap:(id)sender;
+@property (nonatomic, strong) User *user;
 
 @end
 
@@ -34,7 +40,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [[TwitterClient instance] verifyCurrentUserWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.user =  [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject error:nil];
+        [self displayUserInfo];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"No user %@", error);
+    }];
+
+}
+
+-(void) displayUserInfo {
+    self.menuUserName.text = self.user.userNameLabel;
+    self.menuScreenName.text = [NSString stringWithFormat:@"@%@", self.user.userScreenName];
+    self.menuUserImg.layer.cornerRadius = 5;
+    self.menuUserImg.clipsToBounds=YES;
+    [self.menuUserImg setImageWithURL:[NSURL URLWithString:self.user.userImage]];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +66,7 @@
 
 - (IBAction)onProfileTap:(id)sender {
     ProfileViewController *pvc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
-    pvc.selectedUserScreenName = @"pragyapherwani";
+    pvc.selectedUserScreenName = self.user.userScreenName;
     [self.navigationController pushViewController:pvc animated:YES];
 
 }
@@ -62,6 +83,7 @@
 }
 
 - (IBAction)onLogoutTap:(id)sender {
-        NSLog(@"logout tapped");
+    [[TwitterClient instance].requestSerializer removeAccessToken];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

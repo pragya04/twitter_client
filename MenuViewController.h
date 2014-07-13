@@ -7,6 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "User.h"
 @interface MenuViewController : UIViewController
 @end
