@@ -56,7 +56,9 @@
 
 }
 - (IBAction)onMentionsTap:(id)sender {
-        NSLog(@"mentions tapped");
+    TwitterViewController *tvc = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
+        tvc.isMentionsView = YES;
+    [self.navigationController pushViewController:tvc animated:YES];
 }
 
 - (IBAction)onLogoutTap:(id)sender {

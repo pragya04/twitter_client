@@ -10,4 +10,5 @@
 #import <Mantle.h>
 @interface TwitterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSMutableArray *tweets;
+@property (nonatomic, assign) BOOL isMentionsView;
 @end

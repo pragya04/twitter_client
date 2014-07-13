@@ -26,5 +26,8 @@
 - (void)retweetWithTweet:(Tweet *)Tweet success:(void (^)())success;
 - (void)tweetMessage:(NSString *)message success:(void (^)(Tweet *tweet))success;
 - (void)getUserData:(NSString *)screenName success:(void (^)(User *user))success;
+- (AFHTTPRequestOperation *)mentionsTimeLine:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 
 @end

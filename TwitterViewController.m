@@ -85,8 +85,11 @@
                        action:@selector(refresh:)
              forControlEvents:UIControlEventValueChanged];
     tvc.refreshControl = refreshControl;
-    
-    [self loadData];
+    if(self.isMentionsView) {
+        [self loadMentionsData];
+    } else {
+        [self loadData];
+    }
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserverForName:@"FavoriteTapped" object:nil queue:nil usingBlock:^(NSNotification *notification)
      {
@@ -120,6 +123,20 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error loading timeline %@", error);
     }];
+}
+
+- (void)loadMentionsData {
+    [self.client mentionsTimeLine:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.tweets = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < [responseObject count]; i++) {
+            [self.tweets addObject:[MTLJSONAdapter modelOfClass:[Tweet class] fromJSONDictionary:responseObject[i] error:nil]];
+        }
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"error loading timeline %@", error);
+    }];
+    
 }
 
 -(void)viewDidAppear{
