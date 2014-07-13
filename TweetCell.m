@@ -35,6 +35,7 @@ NSString * const ReplyTapped = @"ReplyTapped";
 }
 
 - (void)setTweet:(Tweet *)tweet {
+    
     _tweet = tweet;
     self.userTweetLabel.text = tweet.tweetContent;
     self.userNameLabel.text = tweet.name;

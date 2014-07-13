@@ -20,7 +20,4 @@
 @property (nonatomic, copy, readonly) NSNumber *favorites;
 @property (nonatomic, copy, readonly) NSString *retweetedByUserName;
 @property (nonatomic, copy, readonly) NSNumber *id;
-
-
-
 @end

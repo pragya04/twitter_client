@@ -13,7 +13,10 @@
     return @{
              @"userImage": @"profile_image_url",
              @"userNameLabel": @"name",
-             @"userScreenName": @"screen_name"
+             @"userScreenName": @"screen_name",
+             @"numFollowers": @"followers_count",
+             @"numFollowing": @"friends_count",
+             @"numTweets": @"statuses_count"
              };
 }
 

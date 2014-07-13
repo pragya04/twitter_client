@@ -12,4 +12,8 @@
 @property (nonatomic) NSString *userImage;
 @property (nonatomic) NSString *userNameLabel;
 @property (nonatomic) NSString *userScreenName;
+@property (nonatomic, copy, readonly) NSNumber *numFollowers;
+@property (nonatomic, copy, readonly) NSNumber *numFollowing;
+@property (nonatomic, copy, readonly) NSNumber *numTweets;
+
 @end

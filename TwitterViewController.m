@@ -9,6 +9,7 @@
 #import "TwitterViewController.h"
 #import "ComposeViewController.h"
 #import "TweetViewController.h"
+#import "MenuViewController.h"
 #import "TweetCell.h"
 #import "TwitterClient.h"
 #import "Tweet.h"
@@ -29,13 +30,21 @@
     if (self) {
         self.title = @"Home";
     }
-    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]
-                                      initWithTitle:@"Log Out"
-                                      style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(logOut:)];
+//    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc]
+//                                      initWithTitle:@"Log Out"
+//                                      style:UIBarButtonItemStylePlain
+//                                      target:self
+//                                      action:@selector(logOut:)];
+//    
+//    self.navigationItem.leftBarButtonItem = logOutButton;
     
-    self.navigationItem.leftBarButtonItem = logOutButton;
+    UIBarButtonItem *showMenu = [[UIBarButtonItem alloc]
+                                     initWithTitle:@"Menu"
+                                     style:UIBarButtonItemStylePlain
+                                     target:self
+                                     action:@selector(showMenuAction:)];
+    
+    self.navigationItem.leftBarButtonItem = showMenu;
     
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc]
                                       initWithTitle:@"Compose"
@@ -61,7 +70,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"TweetCell" bundle:nil]
         forCellReuseIdentifier:@"TweetCell"];
     _stubCell = [[UINib nibWithNibName:@"TweetCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-//    self.tableView.rowHeight = 120;
     self.client = [TwitterClient instance];
     
     
@@ -139,8 +147,6 @@
 {
     TweetViewController *tweetvc = [[TweetViewController alloc] init];
     tweetvc.singleTweet = ((Tweet *)self.tweets[indexPath.row]);
-//    tvc.delegate = self;
-    
     self.navigationItem.backBarButtonItem.title = @"Home";
     [self.navigationController pushViewController:tweetvc animated:YES];
 }
@@ -183,6 +189,11 @@
     ComposeViewController *cvc = [[ComposeViewController alloc] init];
     self.navigationItem.backBarButtonItem.title = @"Cancel";
     [self.navigationController pushViewController:cvc animated:YES];
+}
+
+- (void)showMenuAction:(id)sender {
+    MenuViewController *mvc = [[MenuViewController alloc] init];
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 
 

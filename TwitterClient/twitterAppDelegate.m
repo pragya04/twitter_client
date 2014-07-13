@@ -9,6 +9,7 @@
 #import "twitterAppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
+#import "MenuViewController.h"
 #import "Tweet.h"
 #import <Mantle.h>
 
@@ -42,6 +43,7 @@
     
     self.lvc = [[LoginViewController alloc] init];
     self.tvc = [[TwitterViewController alloc] init];
+//    self.mvc = [[MenuViewController alloc] init];
     
     self.nc = [[UINavigationController alloc] initWithRootViewController:self.lvc];
     self.window.rootViewController = self.nc;

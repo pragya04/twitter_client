@@ -75,13 +75,17 @@
     [self POST:@"https://api.twitter.com/1.1/statuses/update.json"
     parameters:@{@"status": message}
        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-           
-//           Tweet *t = [Tweet fromDictionary:responseObject];
-//           success(t);
+           NSLog(@"Tweeted!");
        }
        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
            NSLog(@"Tweet Fail, %@", error);
        }];
 }
+
+-(AFHTTPRequestOperation *)getUserTimeline:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    return [self GET:@"1.1/users/show.json?screen_name=pragyapherwani" parameters:nil
+             success:success failure:failure];
+}
+
 
 @end

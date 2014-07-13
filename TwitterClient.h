@@ -24,4 +24,7 @@
 - (void)favoriteWithTweet:(Tweet *)Tweet success:(void (^)())success;
 - (void)retweetWithTweet:(Tweet *)Tweet success:(void (^)())success;
 - (void)tweetMessage:(NSString *)message success:(void (^)(Tweet *tweet))success;
+- (AFHTTPRequestOperation *)getUserTimeline:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end
