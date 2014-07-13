@@ -8,6 +8,7 @@
 
 #import "TwitterClient.h"
 
+
 @implementation TwitterClient
 
 +(TwitterClient *)instance {
@@ -82,10 +83,21 @@
        }];
 }
 
--(AFHTTPRequestOperation *)getUserTimeline:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    return [self GET:@"1.1/users/show.json?screen_name=pragyapherwani" parameters:nil
-             success:success failure:failure];
+- (void)getUserData:(NSString*)screenName success:(void (^)(User *user))success  {
+    
+    
+    [self GET:@"1.1/users/show.json" parameters:@{@"screen_name":screenName}
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          User *user = [MTLJSONAdapter modelOfClass:[User class]
+                                fromJSONDictionary:responseObject error:nil];
+          success(user);
+      }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          NSLog(@"user profile loading Fail, %@", error);
+      }];
+
 }
+
 
 
 @end

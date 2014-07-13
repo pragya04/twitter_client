@@ -33,11 +33,11 @@
 }
 
 -(void) loadProfileData {
-    [[TwitterClient instance] getUserTimeline:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.user = [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject error:nil];
-        [self displayProfileData];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error loading user profile %@", error);
+
+    [[TwitterClient instance] getUserData:self.selectedUserScreenName success:^(User *user) {
+        
+        self.user = user;
+       [self displayProfileData];
     }];
 }
 

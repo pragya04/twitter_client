@@ -10,6 +10,7 @@
 #import "ComposeViewController.h"
 #import "TweetViewController.h"
 #import "MenuViewController.h"
+#import "ProfileViewController.h"
 #import "TweetCell.h"
 #import "TwitterClient.h"
 #import "Tweet.h"
@@ -17,6 +18,7 @@
 @interface TwitterViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) TwitterClient *client;
+@property (nonatomic, strong) Tweet *selectedTweet;
 
 @end
 
@@ -136,7 +138,24 @@
 {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     cell.tweet = self.tweets[indexPath.row];
+    cell.userImage.userInteractionEnabled = YES;
+    cell.userImage.tag = indexPath.row;
+    
+    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showUserProfile:)];
+    tapped.numberOfTapsRequired = 1;
+    [cell.userImage addGestureRecognizer:tapped];
+    
     return cell;
+}
+
+- (void)showUserProfile: (UITapGestureRecognizer *)sender
+{
+    ProfileViewController *pvc = [[ProfileViewController alloc] init];
+    
+    Tweet *selectedTweet = self.tweets[sender.view.tag];
+    
+    pvc.selectedUserScreenName = selectedTweet.screenName;
+    [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

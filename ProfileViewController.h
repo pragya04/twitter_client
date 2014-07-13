@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *tweetNums;
 @property (weak, nonatomic) IBOutlet UILabel *followerNums;
 @property (weak, nonatomic) IBOutlet UILabel *followingNums;
+@property (strong, nonatomic) NSString *selectedUserScreenName;
 
 @end

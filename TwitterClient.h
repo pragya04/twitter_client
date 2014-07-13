@@ -8,6 +8,7 @@
 
 #import "BDBOAuth1RequestOperationManager.h"
 #import "Tweet.h"
+#import "User.h"
 
 @interface TwitterClient : BDBOAuth1RequestOperationManager
 
@@ -24,7 +25,6 @@
 - (void)favoriteWithTweet:(Tweet *)Tweet success:(void (^)())success;
 - (void)retweetWithTweet:(Tweet *)Tweet success:(void (^)())success;
 - (void)tweetMessage:(NSString *)message success:(void (^)(Tweet *tweet))success;
-- (AFHTTPRequestOperation *)getUserTimeline:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)getUserData:(NSString *)screenName success:(void (^)(User *user))success;
 
 @end

@@ -44,8 +44,8 @@
 }
 
 - (IBAction)onProfileTap:(id)sender {
-    NSLog(@"Profile tapped");
     ProfileViewController *pvc = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController" bundle:nil];
+    pvc.selectedUserScreenName = @"pragyapherwani";
     [self.navigationController pushViewController:pvc animated:YES];
 
 }
