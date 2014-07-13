@@ -11,4 +11,6 @@ Hour spent: 25+ hours
 * [x] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 
 Walkthrough of all user stories:
+
+
 ![Video Walkthrough](mock_twitter.gif)
