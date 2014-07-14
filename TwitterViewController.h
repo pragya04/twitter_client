@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Mantle.h>
-@interface TwitterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@protocol TwitterViewControllerDelegate <NSObject>
+@end
+@interface TwitterViewController :UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, assign) id<TwitterViewControllerDelegate> delegate;
 @property (nonatomic) NSMutableArray *tweets;
 @property (nonatomic, assign) BOOL isMentionsView;
 @end

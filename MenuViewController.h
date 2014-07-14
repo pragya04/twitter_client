@@ -8,5 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+@protocol MenuViewControllerDelegate <NSObject>
+@end
 @interface MenuViewController : UIViewController
+@property (nonatomic, assign) id<MenuViewControllerDelegate> delegate;
 @end

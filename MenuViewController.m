@@ -39,7 +39,9 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+        
     [[TwitterClient instance] verifyCurrentUserWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.user =  [MTLJSONAdapter modelOfClass:[User class] fromJSONDictionary:responseObject error:nil];
         [self displayUserInfo];

@@ -9,7 +9,7 @@
 #import "twitterAppDelegate.h"
 #import "LoginViewController.h"
 #import "TwitterClient.h"
-#import "MenuViewController.h"
+#import "MainViewController.h"
 #import "Tweet.h"
 #import <Mantle.h>
 
@@ -43,9 +43,9 @@
     
     self.lvc = [[LoginViewController alloc] init];
     self.tvc = [[TwitterViewController alloc] init];
-//    self.mvc = [[MenuViewController alloc] init];
+    self.mvc = [[MainViewController alloc] init];
     
-    self.nc = [[UINavigationController alloc] initWithRootViewController:self.lvc];
+    self.nc = [[UINavigationController alloc] initWithRootViewController:self.mvc];
     self.window.rootViewController = self.nc;
     
     self.nc.navigationBar.translucent = NO;
@@ -125,7 +125,9 @@
 }
 
 -(void) showTimeline {
-    TwitterViewController *tvc = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
-    [self.nc pushViewController:tvc animated:YES];
+//    TwitterViewController *tvc = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
+//    [self.nc pushViewController:tvc animated:YES];
+    MainViewController *mvc = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    [self.nc pushViewController:mvc animated:YES];
 }
 @end

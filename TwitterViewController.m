@@ -33,13 +33,13 @@
         self.title = @"Home";
     }
     
-    UIBarButtonItem *showMenu = [[UIBarButtonItem alloc]
-                                     initWithTitle:@"Menu"
-                                     style:UIBarButtonItemStylePlain
-                                     target:self
-                                     action:@selector(showMenuAction:)];
-    
-    self.navigationItem.leftBarButtonItem = showMenu;
+//    UIBarButtonItem *showMenu = [[UIBarButtonItem alloc]
+//                                     initWithTitle:@"Menu"
+//                                     style:UIBarButtonItemStylePlain
+//                                     target:self
+//                                     action:@selector(showMenuAction:)];
+//    
+//    self.navigationItem.leftBarButtonItem = showMenu;
     
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc]
                                       initWithTitle:@"Compose"
@@ -216,8 +216,10 @@
 }
 
 - (void)showMenuAction:(id)sender {
-    MenuViewController *mvc = [[MenuViewController alloc] init];
-    [self.navigationController pushViewController:mvc animated:YES];
+
+    
+//    MenuViewController *mvc = [[MenuViewController alloc] init];
+//    [self.navigationController pushViewController:mvc animated:YES];
 }
 
 
