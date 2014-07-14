@@ -45,7 +45,12 @@
     self.tvc = [[TwitterViewController alloc] init];
     self.mvc = [[MainViewController alloc] init];
     
-    self.nc = [[UINavigationController alloc] initWithRootViewController:self.mvc];
+    if ([[TwitterClient instance] isAuthorized]) {
+        self.nc = [[UINavigationController alloc] initWithRootViewController:self.mvc];
+        [self showTimeline];
+    } else {
+         self.nc = [[UINavigationController alloc] initWithRootViewController:self.lvc];
+    }
     self.window.rootViewController = self.nc;
     
     self.nc.navigationBar.translucent = NO;
@@ -55,11 +60,6 @@
                                                          alpha:1];
     self.nc.navigationBar.tintColor = [UIColor whiteColor];
     [self.nc.navigationBar setBarStyle:UIBarStyleBlack];
-
-    if ([[TwitterClient instance] isAuthorized]) {
-        [self showTimeline];
-    }
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

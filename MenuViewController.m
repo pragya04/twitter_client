@@ -12,6 +12,7 @@
 #import "TwitterClient.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
+#import "LoginViewController.h"
 
 @interface MenuViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *menuUserImg;
@@ -86,7 +87,8 @@
 }
 
 - (IBAction)onLogoutTap:(id)sender {
+    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [[TwitterClient instance].requestSerializer removeAccessToken];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:lvc animated:YES];
 }
 @end
