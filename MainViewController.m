@@ -23,6 +23,8 @@
 @property (strong, nonatomic) UIBarButtonItem *menuPanelButton;
 @property (strong, nonatomic) TwitterViewController *twitterVC;
 @property (strong, nonatomic) MenuViewController *menuVC;
+@property (nonatomic, assign) BOOL showPanel;
+@property (nonatomic, assign) CGPoint preVelocity;
 @end
 
 @implementation MainViewController
@@ -45,6 +47,7 @@
 {
     [super viewDidLoad];
     [self setUpView];
+    [self setupGestures];
 }
 
 -(void)setUpView {
@@ -159,6 +162,75 @@
     }else {
         [_twitterVC.view.layer setCornerRadius:0.0f];
         [_twitterVC.view.layer setShadowOffset:CGSizeMake(offset, offset)];
+    }
+}
+
+
+-(void)setupGestures {
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(movePanel:)];
+    [panRecognizer setMinimumNumberOfTouches:1];
+    [panRecognizer setMaximumNumberOfTouches:1];
+//    [panRecognizer setDelegate:self];
+    
+    [_twitterVC.view addGestureRecognizer:panRecognizer];
+}
+
+-(void)movePanel:(id)sender {
+    [[[(UITapGestureRecognizer*)sender view] layer] removeAllAnimations];
+    
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)sender translationInView:self.view];
+    CGPoint velocity = [(UIPanGestureRecognizer*)sender velocityInView:[sender view]];
+    
+    if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateBegan) {
+        UIView *childView = nil;
+        
+        if(velocity.x > 0){
+            childView = [self getMenuView];
+        }
+        // Make sure the view you're working with is front and center.
+        [self.view sendSubviewToBack:childView];
+        [[sender view] bringSubviewToFront:[(UIPanGestureRecognizer*)sender view]];
+    }
+    
+    if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateEnded) {
+        
+        if(velocity.x > 0) {
+            // NSLog(@"gesture went right");
+        } else {
+            // NSLog(@"gesture went left");
+        }
+        
+        if (!_showPanel) {
+            [self movePanelToOriginalPosition];
+        } else {
+            if (_showingMenuPanel) {
+                [self movePanelRight];
+            }
+        }
+    }
+    
+    if([(UIPanGestureRecognizer*)sender state] == UIGestureRecognizerStateChanged) {
+        if(velocity.x > 0) {
+            // NSLog(@"gesture went right");
+        } else {
+            // NSLog(@"gesture went left");
+        }
+        
+        // Are you more than halfway? If so, show the panel when done dragging by setting this value to YES (1).
+        _showPanel = abs([sender view].center.x - _twitterVC.view.frame.size.width/2) > _twitterVC.view.frame.size.width/2;
+        
+        // Allow dragging only in x-coordinates by only updating the x-coordinate with translation position.
+        [sender view].center = CGPointMake([sender view].center.x + translatedPoint.x, [sender view].center.y);
+        [(UIPanGestureRecognizer*)sender setTranslation:CGPointMake(0,0) inView:self.view];
+        
+        // If you needed to check for a change in direction, you could use this code to do so.
+        if(velocity.x*_preVelocity.x + velocity.y*_preVelocity.y > 0) {
+            // NSLog(@"same direction");
+        } else {
+            // NSLog(@"opposite direction");
+        }
+        
+        _preVelocity = velocity;
     }
 }
 
