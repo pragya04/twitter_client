@@ -11,6 +11,7 @@
 #import "TwitterViewController.h"
 #import "TwitterClient.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ComposeViewController.h"
 #define CENTER_TAG 1
 #define LEFT_PANEL_TAG 2
 #define CORNER_RADIUS 4
@@ -21,6 +22,7 @@
 //@property (nonatomic, strong) MenuViewController *menuViewController;
 @property (nonatomic, assign) BOOL showingMenuPanel;
 @property (strong, nonatomic) UIBarButtonItem *menuPanelButton;
+@property (strong, nonatomic) UIBarButtonItem *composeButton;
 @property (strong, nonatomic) TwitterViewController *twitterVC;
 @property (strong, nonatomic) MenuViewController *menuVC;
 @property (nonatomic, assign) BOOL showPanel;
@@ -33,13 +35,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-//        self.twitterVC = [[TwitterViewController alloc]init];
-//        self.menuVC = [[MenuViewController alloc]init];
-//        if ([[TwitterClient instance] isAuthorized]) {
-//            [self showTimeline];
-//        }
+        
     }
-    
     return self;
 }
 
@@ -51,9 +48,18 @@
 }
 
 -(void)setUpView {
-    self.menuPanelButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(btnMovePanelRight:)];
+    self.menuPanelButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"twitter_menu"] style:UIBarButtonItemStylePlain target:self action:@selector(btnMovePanelRight:)];
     
     self.navigationItem.leftBarButtonItem = self.menuPanelButton;
+    
+    self.composeButton = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"Compose"
+                                      style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(composeButtonTap:)];
+    
+    self.navigationItem.rightBarButtonItem = self.composeButton;
+
     self.menuPanelButton.tag = 1;
     self.twitterVC = [[TwitterViewController alloc] initWithNibName:@"TwitterViewController" bundle:nil];
     self.twitterVC.view.tag = CENTER_TAG;
@@ -64,9 +70,15 @@
     [_twitterVC didMoveToParentViewController:self];
 }
 
+
+- (void)composeButtonTap:(id)sender {
+    ComposeViewController *cvc = [[ComposeViewController alloc] init];
+    self.navigationItem.backBarButtonItem.title = @"Cancel";
+    [self.navigationController pushViewController:cvc animated:YES];
+}
+
 - (void)btnMovePanelRight:(id)sender {
     UIButton *button = sender;
-    NSLog(@"button tag %d", button.tag);
     switch (button.tag){
         case 0: {
             [self movePanelToOriginalPosition];

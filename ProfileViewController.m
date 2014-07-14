@@ -8,11 +8,13 @@
 
 #import "ProfileViewController.h"
 #import "TwitterClient.h"
+#import "TwitterViewController.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface ProfileViewController ()
 @property (nonatomic, strong) User *user;
+@property (strong, nonatomic) UIBarButtonItem *homeButton;
 @end
 
 @implementation ProfileViewController
@@ -29,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"twitter_menu.png"];
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"twitter_menu.png"];
+    self.navigationController.navigationBar.topItem.title = @"";
     [self loadProfileData];
 }
 

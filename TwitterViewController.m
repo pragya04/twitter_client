@@ -32,23 +32,7 @@
     if (self) {
         self.title = @"Home";
     }
-    
-//    UIBarButtonItem *showMenu = [[UIBarButtonItem alloc]
-//                                     initWithTitle:@"Menu"
-//                                     style:UIBarButtonItemStylePlain
-//                                     target:self
-//                                     action:@selector(showMenuAction:)];
-//    
-//    self.navigationItem.leftBarButtonItem = showMenu;
-    
-    UIBarButtonItem *composeButton = [[UIBarButtonItem alloc]
-                                      initWithTitle:@"Compose"
-                                      style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(composeButtonTap:)];
-    
-    self.navigationItem.rightBarButtonItem = composeButton;
-
+        
     return self;
 }
 
@@ -61,7 +45,9 @@
         forCellReuseIdentifier:@"TweetCell"];
     _stubCell = [[UINib nibWithNibName:@"TweetCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     self.client = [TwitterClient instance];
-    
+    self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"twitter_menu.png"];
+    self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"twitter_menu.png"];
+    self.navigationController.navigationBar.topItem.title = @"";
     
     /* For refresh control*/
     UITableViewController *tvc = [[UITableViewController alloc] init];
@@ -207,12 +193,6 @@
     self.navigationItem.backBarButtonItem.title = @"Cancel";
     [self.navigationController pushViewController:cvc animated:YES];
 
-}
-
-- (void)composeButtonTap:(id)sender {
-    ComposeViewController *cvc = [[ComposeViewController alloc] init];
-    self.navigationItem.backBarButtonItem.title = @"Cancel";
-    [self.navigationController pushViewController:cvc animated:YES];
 }
 
 - (void)showMenuAction:(id)sender {
